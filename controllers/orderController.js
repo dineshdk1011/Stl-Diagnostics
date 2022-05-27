@@ -40,8 +40,7 @@ const view = async (req, res) => {
     return;
   }
 
-  await Order.findAll({ where: { userid: data } })
-    .then((data) => {
+  await Order.findAll({ where: { userid: data } }).then((data) => {
       res.send(data);
     })
     .catch((err) => {

@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "stl-diagnostics",
-    "host": "127.0.0.1",
+    "username": "stldiagnostics",
+    "password": "7tFbEjy2p4XSRe4k",
+    "database": "stldiagnostics",
+    "host": "168.119.159.183",
     "dialect": "mysql"
   },
   "test": {

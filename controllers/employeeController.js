@@ -1,5 +1,6 @@
 const models = require("../models");
 const Employee = models.employee;
+const Order = models.Order;
 const bcrypt = require("bcryptjs");
 const secret = "4641316895";
 const jwt = require("jsonwebtoken");
@@ -132,7 +133,7 @@ const destroy = async (req, res) => {
     });
 };
 const login = async (req, res) => {
-  console.log(req.body.email,req.body.password)
+  console.log(req.body.email, req.body.password)
   try {
     let user = await Employee.findOne({
       where: { email: req.body.email },
@@ -170,7 +171,17 @@ const login = async (req, res) => {
     });
   }
 };
+const allappointment = async (req, res) => {
 
+  try {
+    var employeeid = req.body.employeeid
+    await Order.findAll({ where: { employeeid: employeeid } }).then((data) => {
+      console.log(data)
+    })
+  } catch (error) {
+
+  }
+}
 module.exports = {
   create,
   viewall,
@@ -179,4 +190,5 @@ module.exports = {
   destroy,
   viewemployee,
   login,
+  allappointment
 };
