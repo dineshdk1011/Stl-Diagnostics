@@ -15,6 +15,7 @@ router.post("/viewpatient", employeeController.viewemployee);
 router.post("/login", employeeController.login);
 router.post("/allappointment", employeeController.allappointment);
 router.post("/allappointmentdata", employeeController.allappointmentdata);
+router.post("/passwordchange", employeeController.passwordchange);
 
 
 module.exports = router;

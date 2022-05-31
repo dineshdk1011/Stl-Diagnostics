@@ -135,7 +135,6 @@ const destroy = async (req, res) => {
     });
 };
 const login = async (req, res) => {
-  console.log(req.body.email, req.body.password)
   try {
     let user = await Employee.findOne({
       where: { email: req.body.email },
@@ -183,7 +182,8 @@ const allappointment = async (req, res) => {
       if (data.length !== 0) {
         var upcommingdata = []
         for (var i = 0; i < data.length; i++) {
-          console.log(data[i].slot, time)
+          var converttime =moment(data[i].slot).format("HH:mm")
+          console.log(converttime)
           if (data[i].date > date) {
             upcommingdata.push(data[i])
           } else if (data[i].date == date && data[i].slot > time) {
@@ -209,6 +209,54 @@ const allappointmentdata = async (req, res) => {
 
   }
 }
+
+const passwordchange = async (req, res) => {
+  try {
+    var employeeid = req.body.id
+    let user = await Employee.findOne({ where: { employeeid: employeeid } })
+    if (user) {
+      let passwordresult = await bcrypt.compare(
+        req.body.oldpassword,
+        user.password
+      );
+      if (passwordresult == true) {
+        var salt = bcrypt.genSaltSync(10);
+        var data = {
+          password: bcrypt.hashSync(req.body.password, salt)
+        }
+        await Employee.update(data, {
+          where: {
+            id: employeeid
+          }
+        }).then(() => {
+          res.send("Updated Successfully");
+        }).catch(err => {
+          console.log(err)
+          res.status(404).send({
+            message:
+              err.message || "Some error occurred in query."
+          })
+        });
+      } else {
+        res.json({
+          status: 400,
+          message: "Wrong Password.. Please Check",
+        })
+      }
+    } else {
+      res.json({
+        status: 400,
+        message: "User Not Found.. Please Check",
+      })
+    }
+  } catch (err) {
+    console.log(error)
+    res.json({
+      status: 500,
+      message: "Some error occurred in query",
+    })
+  }
+}
 module.exports = {
   create,
   viewall,
@@ -218,5 +266,6 @@ module.exports = {
   viewemployee,
   login,
   allappointment,
-  allappointmentdata
+  allappointmentdata,
+  passwordchange
 };
