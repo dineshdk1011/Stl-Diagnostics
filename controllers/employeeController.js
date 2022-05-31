@@ -183,7 +183,7 @@ const allappointment = async (req, res) => {
       if (data.length !== 0) {
         var upcommingdata = []
         for (var i = 0; i < data.length; i++) {
-          console.log(data[i].slot , time)
+          console.log(data[i].slot, time)
           if (data[i].date > date) {
             upcommingdata.push(data[i])
           } else if (data[i].date == date && data[i].slot > time) {
@@ -197,6 +197,18 @@ const allappointment = async (req, res) => {
 
   }
 }
+
+const allappointmentdata = async (req, res) => {
+
+  try {
+    var employeeid = req.body.employeeid
+    await Order.findAll({ where: { employeeid: employeeid } }).then((data) => {
+      res.send(data);
+    })
+  } catch (error) {
+
+  }
+}
 module.exports = {
   create,
   viewall,
@@ -205,5 +217,6 @@ module.exports = {
   destroy,
   viewemployee,
   login,
-  allappointment
+  allappointment,
+  allappointmentdata
 };

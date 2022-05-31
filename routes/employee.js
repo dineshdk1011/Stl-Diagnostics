@@ -14,6 +14,7 @@ router.delete("/destroy", employeeController.destroy);
 router.post("/viewpatient", employeeController.viewemployee);
 router.post("/login", employeeController.login);
 router.post("/allappointment", employeeController.allappointment);
+router.post("/allappointmentdata", employeeController.allappointmentdata);
 
 
 module.exports = router;
