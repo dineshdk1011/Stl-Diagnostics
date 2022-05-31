@@ -4,6 +4,8 @@ const Order = models.Order;
 const bcrypt = require("bcryptjs");
 const secret = "4641316895";
 const jwt = require("jsonwebtoken");
+const moment = require('moment')
+const Patient = models.Patient
 
 const create = async (req, res) => {
   const data = req.body;
@@ -175,8 +177,21 @@ const allappointment = async (req, res) => {
 
   try {
     var employeeid = req.body.employeeid
+    var date = moment().format("DD-MM-YYYY")
+    var time = moment().format("hh:mm A")
     await Order.findAll({ where: { employeeid: employeeid } }).then((data) => {
-      console.log(data)
+      if (data.length !== 0) {
+        var upcommingdata = []
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i].slot , time)
+          if (data[i].date > date) {
+            upcommingdata.push(data[i])
+          } else if (data[i].date == date && data[i].slot > time) {
+            upcommingdata.push(data[i])
+          }
+        }
+        res.send(upcommingdata);
+      }
     })
   } catch (error) {
 
