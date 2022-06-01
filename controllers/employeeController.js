@@ -177,16 +177,13 @@ const allappointment = async (req, res) => {
   try {
     var employeeid = req.body.employeeid
     var date = moment().format("DD-MM-YYYY")
-    var time = moment().format("hh:mm A")
     await Order.findAll({ where: { employeeid: employeeid } }).then((data) => {
       if (data.length !== 0) {
         var upcommingdata = []
         for (var i = 0; i < data.length; i++) {
-          var converttime =moment(data[i].slot).format("HH:mm")
-          console.log(converttime)
-          if (data[i].date > date) {
-            upcommingdata.push(data[i])
-          } else if (data[i].date == date && data[i].slot > time) {
+          var a = moment(data[i].date, 'DD-MM-YYYY');
+          var b = moment(date, 'DD-MM-YYYY');
+          if (a >= b) {
             upcommingdata.push(data[i])
           }
         }
