@@ -30,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     gender: DataTypes.STRING,
     relationship:DataTypes.STRING,
     userid:DataTypes.STRING,
+    latitude:DataTypes.STRING,
+    longitude:DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Patient',

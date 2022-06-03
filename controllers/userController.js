@@ -44,6 +44,7 @@ const create = async (req, res) => {
 const login = async (req, res) => {
     try {
         let user = await User.findOne({ where: { phone: Number(req.body.phone) } })
+        console.log(user)
         if (user) {
             let passwordresult = await bcrypt.compare(
                 req.body.password,
