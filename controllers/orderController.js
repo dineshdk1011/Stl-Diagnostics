@@ -52,7 +52,7 @@ const view = async (req, res) => {
 
 const update = async (req, res) => {
   const value = req.body;
-  const id = req.body.id;
+  const id = req.body.orderid;
   console.log(value, id);
 
   if (!req.body) {
