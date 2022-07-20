@@ -34,24 +34,24 @@ const viewall = async (req, res) => {
 };
 
 const view = async (req, res) => {
-  const data = req.body.patientid;
+  const data = req.body.userid;
 
   if (!req.body) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Content can not be empty!"
     });
     return;
   }
 
-  await Patient.findAll({ where: { patientid: data } })
-    .then((data) => {
-      res.send(data);
+  await Patient.findAll({ where: { userid: data } }).then(data => {
+    res.send(data);
+  }).catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred in query."
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred in query.",
-      });
-    });
+  });
+
 };
 
 const viewpatient = async (req, res) => {
