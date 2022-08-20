@@ -131,32 +131,22 @@ const update = async (req, res) => {
 }
 
 const destroy = async (req, res) => {
-    try {
-        const data = req.body;
+    const data = req.body.id;
 
-        if (!req.body) {
-            res.status(400).send({
-                message: "Content can not be empty!"
-            });
-            return;
-        }
-
-        await Test.destroy({
-            where: data
-        }).then(() => {
-            res.send("Deleted Successfully");
-        }).catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred in query."
-            })
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
         });
-    } catch (err) {
+        return;
+    }
+    await Test.destroy({ where: { id: data } }).then(() => {
+        res.send("Deleted Successfully");
+    }).catch(err => {
         res.status(500).send({
             message:
                 err.message || "Some error occurred in query."
         })
-    }
+    });
 }
 
 const viewtestcenter = async (req, res) => {
