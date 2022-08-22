@@ -15,6 +15,7 @@ var orderRouter = require("./routes/order");
 var cartRouter = require("./routes/cart");
 var razorpayRouter = require("./routes/razorpay");
 var couponRouter = require("./routes/coupon");
+var attendanceRouter = require("./routes/attendance");
 
 var app = express();
 app.use(cors());
@@ -39,7 +40,7 @@ app.use("/order", orderRouter);
 app.use("/cart", cartRouter);
 app.use("/razorpay", razorpayRouter);
 app.use("/coupon", couponRouter);
-
+app.use("/attendance", attendanceRouter);
 
 
 global.responseHandler = require("./config/responseHandler");
