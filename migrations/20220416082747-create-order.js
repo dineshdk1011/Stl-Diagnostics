@@ -26,6 +26,9 @@ module.exports = {
       amount: {
         type: Sequelize.STRING,
       },
+      discount: {
+        type: Sequelize.STRING,
+      },
       patientid: {
         type: Sequelize.STRING,
       },

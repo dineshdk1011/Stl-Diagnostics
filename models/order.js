@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       testcenter: DataTypes.STRING,
       testid: DataTypes.STRING,
       amount: DataTypes.STRING,
+      discount: DataTypes.STRING,
       patientid: DataTypes.STRING,
       userid: DataTypes.STRING,
       status: DataTypes.STRING,
