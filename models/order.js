@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       date: DataTypes.STRING,
       slot: DataTypes.STRING,
       employeeid: DataTypes.STRING,
+      result: DataTypes.STRING,
     },
     {
       sequelize,

@@ -44,6 +44,9 @@ module.exports = {
       slot: {
         type: Sequelize.STRING,
       },
+      result:{
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
