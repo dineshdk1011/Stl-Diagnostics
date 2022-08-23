@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       slot: DataTypes.STRING,
       employeeid: DataTypes.STRING,
       result: DataTypes.STRING,
+      review: DataTypes.STRING,
+      center_rating: DataTypes.STRING,
+      employee_rating: DataTypes.STRING,
     },
     {
       sequelize,

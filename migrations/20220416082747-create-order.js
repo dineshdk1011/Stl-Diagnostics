@@ -44,7 +44,16 @@ module.exports = {
       slot: {
         type: Sequelize.STRING,
       },
-      result:{
+      result: {
+        type: Sequelize.STRING,
+      },
+      review: {
+        type: Sequelize.STRING,
+      },
+      center_rating: {
+        type: Sequelize.STRING,
+      },
+      employee_rating: {
         type: Sequelize.STRING,
       },
       createdAt: {

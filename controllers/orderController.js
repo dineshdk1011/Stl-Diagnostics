@@ -41,8 +41,8 @@ const view = async (req, res) => {
   }
 
   await Order.findAll({ where: { userid: data } }).then((data) => {
-      res.send(data);
-    })
+    res.send(data);
+  })
     .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred in query.",
@@ -70,6 +70,7 @@ const update = async (req, res) => {
       res.send("Updated Successfully");
     })
     .catch((err) => {
+      console.log(err)
       res.status(500).send({
         message: err.message || "Some error occurred in query.",
       });

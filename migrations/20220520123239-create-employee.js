@@ -35,6 +35,9 @@ module.exports = {
       profile: {
         type: Sequelize.STRING
       },
+      rating: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

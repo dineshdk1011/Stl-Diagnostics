@@ -7,7 +7,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/create", employeeController.create);
-router.put("/update", employeeController.update);
+router.post("/update", employeeController.update);
 router.post("/view", employeeController.view);
 router.get("/viewall", employeeController.viewall);
 router.delete("/destroy", employeeController.destroy);
