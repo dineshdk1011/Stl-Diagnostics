@@ -77,7 +77,7 @@ const viewpatient = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const value = req.body.value;
+  const value = req.body;
   const id = req.body.id;
   if (!req.body) {
     res.status(400).send({
@@ -102,25 +102,21 @@ const update = async (req, res) => {
 };
 
 const destroy = async (req, res) => {
-  const data = req.body;
+  const data = req.body.id;
 
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
-    return;
-  }
-
-  await Patient.destroy({
-    where: data,
-  })
-    .then(() => {
-      res.send("Deleted Successfully");
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred in query.",
-      });
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+    await Patient.destroy({ where: { id: data } }).then(() => {
+        res.send("Deleted Successfully");
+    }).catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred in query."
+        })
     });
 };
 

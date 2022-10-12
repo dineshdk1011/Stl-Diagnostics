@@ -7,10 +7,10 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/create', patientController.create)
-router.put('/update', patientController.update)
+router.post('/update', patientController.update)
 router.post('/view', patientController.view)
 router.get('/viewall', patientController.viewall)
-router.delete('/destroy', patientController.destroy)
+router.post('/destroy', patientController.destroy)
 router.post('/viewpatient', patientController.viewpatient)
 
 
