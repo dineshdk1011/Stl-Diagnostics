@@ -16,6 +16,9 @@ var cartRouter = require("./routes/cart");
 var razorpayRouter = require("./routes/razorpay");
 var couponRouter = require("./routes/coupon");
 var attendanceRouter = require("./routes/attendance");
+var labresultRouter = require("./routes/labresult");
+var ticketRouter = require("./routes/ticket");
+var payslipRouter = require("./routes/payslip");
 
 var app = express();
 app.use(cors());
@@ -41,6 +44,9 @@ app.use("/cart", cartRouter);
 app.use("/razorpay", razorpayRouter);
 app.use("/coupon", couponRouter);
 app.use("/attendance", attendanceRouter);
+app.use("/labresult", labresultRouter);
+app.use("/ticket", ticketRouter);
+app.use("/payslip", payslipRouter);
 
 
 global.responseHandler = require("./config/responseHandler");

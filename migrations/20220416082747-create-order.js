@@ -56,6 +56,12 @@ module.exports = {
       employee_rating: {
         type: Sequelize.STRING,
       },
+      employee_allocate: {
+        type: Sequelize.STRING,
+      },
+      employee_cancel: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
