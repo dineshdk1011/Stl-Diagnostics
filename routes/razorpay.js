@@ -3,8 +3,8 @@ var router = express.Router();
 var Razorpay = require("razorpay");
 
 var instance = new Razorpay({
-  key_id: "rzp_test_p2fIXj2Ygz7phw",
-  key_secret: "bfxmhO9bbHpZzP3Df5ncdWas",
+  key_id: "rzp_test_MFcpaYfgLbGZIO",
+  key_secret: "2tCQbx3f71pBS0MWkWyitZKd",
 });
 
 /* GET users listing. */
