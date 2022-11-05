@@ -12,5 +12,7 @@ router.post("/view", orderController.view);
 router.get("/viewall", orderController.viewall);
 router.delete("/destroy", orderController.destroy);
 router.post("/viewbydate", orderController.viewbydate);
+router.get("/orderdetails", orderController.orderdetails);
+router.post("/orderdetailsbyuser", orderController.orderdetailsbyuser);
 
 module.exports = router;

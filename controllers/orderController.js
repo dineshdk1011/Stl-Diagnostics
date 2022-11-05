@@ -1,5 +1,8 @@
 const models = require("../models");
 const Order = models.Order;
+const Centers = models.Centers;
+const Employee = models.employee;
+const Patient = models.Patient;
 
 const create = async (req, res) => {
   const data = req.body;
@@ -40,9 +43,10 @@ const view = async (req, res) => {
     return;
   }
 
-  await Order.findAll({ where: { userid: data } }).then((data) => {
-    res.send(data);
-  })
+  await Order.findAll({ where: { userid: data } })
+    .then((data) => {
+      res.send(data);
+    })
     .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred in query.",
@@ -70,7 +74,7 @@ const update = async (req, res) => {
       res.send("Updated Successfully");
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       res.status(500).send({
         message: err.message || "Some error occurred in query.",
       });
@@ -121,6 +125,114 @@ const viewbydate = async (req, res) => {
     });
 };
 
+const orderdetails = async (req, res) => {
+  await Order.findAll()
+    .then(async (data) => {
+      if (data.length !== 0) {
+        var alldata = [];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].employeeid !== null) {
+            await Centers.findAll({
+              where: { centertid: data[i].testcenter },
+            }).then(async (centerdata) => {
+              await Employee.findAll({
+                where: { employeeid: data[i].employeeid },
+              }).then(async (employeedata) => {
+                await Patient.findAll({
+                  where: { patientid: data[i].patientid },
+                }).then((patientdata) => {
+                  alldata.push({
+                    order: data[i],
+                    center: centerdata[0],
+                    employee: employeedata[0],
+                    patient: patientdata[0],
+                  });
+                });
+              });
+            });
+          } else {
+            await Centers.findAll({
+              where: { centertid: data[i].testcenter },
+            }).then(async (centerdata) => {
+              await Patient.findAll({
+                where: { patientid: data[i].patientid },
+              }).then((patientdata) => {
+                alldata.push({
+                  order: data[i],
+                  center: centerdata[0],
+                  employee: [],
+                  patient: patientdata[0],
+                });
+              });
+            });
+          }
+        }
+        res.send(alldata);
+      } else {
+        res.send([]);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred in query.",
+      });
+    });
+};
+const orderdetailsbyuser = async (req, res) => {
+  const data = req.body.userid;
+  await Order.findAll({ where: { userid: data } })
+    .then(async (data) => {
+      if (data.length !== 0) {
+        var alldata = [];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].employeeid !== null) {
+            await Centers.findAll({
+              where: { centertid: data[i].testcenter },
+            }).then(async (centerdata) => {
+              await Employee.findAll({
+                where: { employeeid: data[i].employeeid },
+              }).then(async (employeedata) => {
+                await Patient.findAll({
+                  where: { patientid: data[i].patientid },
+                }).then((patientdata) => {
+                  alldata.push({
+                    order: data[i],
+                    center: centerdata[0],
+                    employee: employeedata[0],
+                    patient: patientdata[0],
+                  });
+                });
+              });
+            });
+          } else {
+            await Centers.findAll({
+              where: { centertid: data[i].testcenter },
+            }).then(async (centerdata) => {
+              await Patient.findAll({
+                where: { patientid: data[i].patientid },
+              }).then((patientdata) => {
+                alldata.push({
+                  order: data[i],
+                  center: centerdata[0],
+                  employee: [],
+                  patient: patientdata[0],
+                });
+              });
+            });
+          }
+        }
+        res.send(alldata);
+      } else {
+        res.send([]);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred in query.",
+      });
+    });
+};
+
 module.exports = {
   create,
   viewall,
@@ -128,4 +240,6 @@ module.exports = {
   update,
   destroy,
   viewbydate,
+  orderdetails,
+  orderdetailsbyuser,
 };
